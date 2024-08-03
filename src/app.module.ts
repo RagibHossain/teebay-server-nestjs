@@ -1,9 +1,8 @@
-import {PostgreSqlDriver} from '@mikro-orm/postgresql'
+import {PostgreSqlDriver, ReflectMetadataProvider} from '@mikro-orm/postgresql'
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 
 import { UsersModule } from './users/users.module';
-import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 import * as path from 'path';
 
 @Module({
@@ -15,7 +14,7 @@ import * as path from 'path';
       password: 'postgres',
       dbName: 'teebay',
       driver: PostgreSqlDriver,
-      metadataProvider: TsMorphMetadataProvider,
+      metadataProvider: ReflectMetadataProvider,
       migrations: {
         path: "src/db/migrations",
       },

@@ -1,7 +1,14 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { UsersRepository } from '@/users/users.repository';
+import { Entity, EntityRepositoryType, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity } from '../base.entity';
+import { RegisterUserDto } from '@/users/users.dtos';
 
-@Entity()
-export class User {
+@Entity({
+   tableName: "users",
+   repository: () => UsersRepository,
+ })
+ export class User extends BaseEntity {
+   [EntityRepositoryType]?: UsersRepository;
 
    @PrimaryKey({ autoincrement: true })
    id!: number;
